@@ -1,6 +1,6 @@
 import { Args, ID, Query } from '@nestjs/graphql';
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '@server/shared';
+import { PrismaService } from '@jrumandal/shared';
 import { Category } from '../dto/category.type';
 import { Product } from '../dto/product.type';
 import { ProductAttribute } from '../dto/product-attribute.type';

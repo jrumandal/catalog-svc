@@ -28,7 +28,7 @@
     "@nestjs/platform-express": "^11.2.3",
     "@nestjs/swagger": "^11.4.7",
     "@nestjs/terminus": "^10.3.0",
-    "@server/shared": "workspace:*",
+    "@jrumandal/shared": "workspace:*",
     "graphql": "^16.14.2",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",

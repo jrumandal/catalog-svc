@@ -12,7 +12,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import {
   AllExceptionsFilter,
   LoggingInterceptor,
-} from '@server/shared';
+} from '@jrumandal/shared';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
@@ -24,7 +24,7 @@ async function bootstrap() {
     credentials: true,
   });
 
-  // Shared cross-cutting concerns (from `@server/shared`).
+  // Shared cross-cutting concerns (from `@jrumandal/shared`).
   app.useGlobalFilters(new AllExceptionsFilter());
   app.useGlobalInterceptors(new LoggingInterceptor());
 

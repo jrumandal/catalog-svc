@@ -5,7 +5,7 @@ import {
   AppConfigModule,
   HealthModule,
   SharedModule,
-} from '@server/shared';
+} from '@jrumandal/shared';
 import { AppController } from './app.controller';
 import { CatalogResolver } from './resolvers/catalog.resolver';
 
@@ -13,9 +13,9 @@ import { CatalogResolver } from './resolvers/catalog.resolver';
  * Root module for the catalog service.
  *
  * Wires together:
- *  - `AppConfigModule` (from `@server/shared`) — typed env config, global
- *  - `SharedModule` (from `@server/shared`) — provides the global `PrismaService`
- *  - `HealthModule` (from `@server/shared`) — `/health` with a Prisma DB ping
+ *  - `AppConfigModule` (from `@jrumandal/shared`) — typed env config, global
+ *  - `SharedModule` (from `@jrumandal/shared`) — provides the global `PrismaService`
+ *  - `HealthModule` (from `@jrumandal/shared`) — `/health` with a Prisma DB ping
  *  - `GraphQLModule` (Apollo) — auto-generates the schema from resolvers + DTOs
  *
  * The resolvers + DTOs mirror the canonical `graphql/catalog.graphql`.

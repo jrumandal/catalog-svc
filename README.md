@@ -16,7 +16,7 @@ services that the **api-gateway** stitches together.
 | `GET /` | Service info (name, status, links). |
 | `POST /graphql` | GraphQL endpoint (catalog domain). |
 | `GET /api-docs` | Swagger UI (OpenAPI). |
-| `GET /health` | Health check (Prisma DB ping) — from `@server/shared`. |
+| `GET /health` | Health check (Prisma DB ping) — from `@jrumandal/shared`. |
 
 Default port: **4001** (override with `PORT`).
 
@@ -81,19 +81,19 @@ enum ProductSort {
 
 ## Data model (Prisma)
 
-The service is backed by the **shared Prisma schema** in `@server/shared`
+The service is backed by the **shared Prisma schema** in `@jrumandal/shared`
 (`prisma/schema.prisma`). The catalog domain uses the `Product`, `Category`,
 `ProductCategory`, and `ProductAttribute` models. Money is stored as integer
 cents (`price`) + `currency` and mapped to the `Money` GraphQL type.
 
 > The Prisma schema, migrations, and seed live in **`server-shared`** so all
 > three services share one database contract. This service consumes the
-> generated `PrismaClient` through `@server/shared`'s `PrismaService`.
+> generated `PrismaClient` through `@jrumandal/shared`'s `PrismaService`.
 
-## Consuming `@server/shared`
+## Consuming `@jrumandal/shared`
 
 `app.module.ts` imports `AppConfigModule`, `SharedModule`, and `HealthModule`
-from `@server/shared`; `main.ts` applies the global `AllExceptionsFilter` and
+from `@jrumandal/shared`; `main.ts` applies the global `AllExceptionsFilter` and
 `LoggingInterceptor`. This gives the service, for free:
 
 - typed env config
@@ -102,7 +102,7 @@ from `@server/shared`; `main.ts` applies the global `AllExceptionsFilter` and
 - structured request logging
 - a consistent error envelope for every exception
 
-`@server/shared` is a **workspace dependency** (`workspace:*`). In this
+`@jrumandal/shared` is a **workspace dependency** (`workspace:*`). In this
 standalone repo it resolves through the pnpm workspace link to
 `server-shared/dist/index.js` (main) + `dist/index.d.ts` (types) — so
 **`server-shared` must be built (`tsc` → `dist/`) before this repo is
@@ -116,7 +116,7 @@ typechecked, tested, or built**. CI does this automatically (see
 | Runtime | Node 22 LTS, CommonJS |
 | Framework | NestJS 11 (`@nestjs/common`, `@nestjs/core`, `@nestjs/config`, `@nestjs/platform-express`, `@nestjs/swagger`) |
 | GraphQL | `@nestjs/graphql` + `@nestjs/apollo` (Apollo) |
-| ORM | Prisma 6 (shared schema from `@server/shared`) |
+| ORM | Prisma 6 (shared schema from `@jrumandal/shared`) |
 | Build | `tsc` → `dist/` (CommonJS) |
 | Tests | Jest + ts-jest |
 | Lint | ESLint 9 (flat) + typescript-eslint |
@@ -159,7 +159,7 @@ pnpm typecheck      # tsc --noEmit
 ```
 
 > **Prerequisite:** `server-shared` must be built first (it provides
-> `@server/shared` + the generated Prisma client). In CI this is automatic;
+> `@jrumandal/shared` + the generated Prisma client). In CI this is automatic;
 > locally run `cd ../server-shared && pnpm install && pnpm prisma:generate &&
 > pnpm build` before building this service.
 
@@ -169,5 +169,5 @@ The service declares (in `package.json`):
 
 - `@nestjs/graphql` + `@nestjs/apollo` — GraphQL schema generation + Apollo.
 - `@nestjs/*` — the NestJS runtime (common, core, config, platform-express, swagger, terminus).
-- `@server/shared` — shared config / Prisma / health / logging (workspace dep).
+- `@jrumandal/shared` — shared config / Prisma / health / logging (workspace dep).
 - `graphql` — the GraphQL runtime.
