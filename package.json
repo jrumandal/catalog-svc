@@ -1,5 +1,5 @@
 {
-  "name": "@server/catalog-svc",
+  "name": "@jrumandal/catalog-svc",
   "version": "0.0.1",
   "private": true,
   "description": "Catalog domain microservice (NestJS + GraphQL + Prisma).",

@@ -1,11 +1,11 @@
-# `@server/catalog-svc` — Catalog microservice
+# `@jrumandal/catalog-svc` — Catalog microservice
 
 The **catalog-svc** is the NestJS microservice that owns the **catalog domain**
 (products, categories). It exposes a GraphQL API (via `@nestjs/graphql` +
 Apollo) backed by **Prisma** (PostgreSQL), and is one of the three upstream
 services that the **api-gateway** stitches together.
 
-> **Package name is `@server/catalog-svc`** — see `package.json`.
+> **Package name is `@jrumandal/catalog-svc`** — see `package.json`.
 > **Status:** Faithful port of the reference `libs/server/catalog-svc`,
 > re-homed as a standalone, independently versioned repository.
 
@@ -132,7 +132,7 @@ catalog-svc/
 ├── .env.example               # PORT, DATABASE_URL, …
 ├── eslint.config.mjs          # flat ESLint 9 config
 ├── jest.config.cts            # Jest + ts-jest
-├── package.json               # @server/catalog-svc (private)
+├── package.json               # @jrumandal/catalog-svc (private)
 ├── tsconfig.json              # base compiler options
 ├── tsconfig.build.json        # build → dist/
 ├── tsconfig.spec.json         # test (Jest)
